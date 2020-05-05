@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Form Sample Kotlin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+<main role="main" class="container">
+    <div class="py-5 text-center">
+        <h1>input form by thymeleaf</h1>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered" th:object="${demoModel}">
+            <thead class="table-dark">
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>text</th>
+                <td th:text="*{stringSimple}"></td>
+            </tr>
+            <tr>
+                <th>text (nullable)</th>
+                <td th:text="*{stringNullable}"></td>
+            </tr>
+            <tr>
+                <th>date (text)</th>
+                <td th:text="*{stringDate}"></td>
+            </tr>
+            <tr>
+                <th>date</th>
+                <td th:text="*{#dates.format(date, 'yyyy-MM-dd')}"></td>
+            </tr>
+            <tr>
+                <th>email</th>
+                <td th:text="*{stringEmail}"></td>
+            </tr>
+            <tr>
+                <th>text area</th>
+                <td th:text="*{textArea}"></td>
+            </tr>
+            <tr>
+                <th>selectSingle</th>
+                <td th:text="*{selectSingle}"></td>
+            </tr>
+            <tr>
+                <th>selectMultiple</th>
+                <td><span th:each="item : *{selectMultiple}"><span th:text="${item}"></span>&nbsp;</span></td>
+            </tr>
+            <tr>
+                <th>checkSingle</th>
+                <td th:text="*{checkSingle}"></td>
+            </tr>
+            <tr>
+                <th>checkMultiple</th>
+                <td><span th:each="item : *{checkMultiple}"><span th:text="${item}"></span>&nbsp;</span></td>
+            </tr>
+            <tr>
+                <th>radio</th>
+                <td th:text="*{radio}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

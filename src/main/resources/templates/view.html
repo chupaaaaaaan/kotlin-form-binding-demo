@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Form Sample Kotlin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+<main role="main" class="container">
+    <div class="py-5 text-center">
+        <h1>input form by thymeleaf</h1>
+    </div>
+
+    <form method="post" th:action="@{/confirm}" th:object="${demoForm}">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" th:for="stringSimple">text</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" th:field="*{stringSimple}">
+                <span th:if="${#fields.hasErrors('stringSimple')}" th:errors="*{stringSimple}"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" th:for="stringNullable">text (nullable)</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" th:field="*{stringNullable}">
+                <span th:if="${#fields.hasErrors('stringNullable')}" th:errors="*{stringNullable}"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" th:for="stringDate">date (text)</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" th:field="*{stringDate}">
+                <span th:if="${#fields.hasErrors('stringDate')}" th:errors="*{stringDate}"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" th:for="date">date</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" th:field="*{date}">
+                <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" th:for="stringEmail">email</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" th:field="*{stringEmail}">
+                <span th:if="${#fields.hasErrors('stringEmail')}" th:errors="*{stringEmail}"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" th:for="textArea">text area</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" th:field="*{textArea}"></textarea>
+                <span th:if="${#fields.hasErrors('textArea')}" th:errors="*{textArea}"></span>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" th:for="selectSingle">select (single item)</label>
+            <div class="col-sm-10">
+                <select class="form-control" th:field="*{selectSingle}">
+                    <option th:each="item : ${selectItem}" th:value="${item.value}" th:text="${item.key}">pull down</option>
+                </select>
+                <span th:if="${#fields.hasErrors('selectSingle')}" th:errors="*{selectSingle}"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" th:for="selectMultiple">select (multiple item)</label>
+            <div class="col-sm-10">
+                <select multiple class="form-control" th:field="*{selectMultiple}">
+                    <option th:each="item : ${selectItem}" th:value="${item.value}" th:text="${item.key}">pull down</option>
+                </select>
+                <span th:if="${#fields.hasErrors('selectMultiple')}" th:errors="*{selectMultiple}"></span>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group row">
+            <div class="col-sm-2">checkbox</div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <div>
+                        <input type="checkbox" class="form-check-input" th:field="*{checkSingle}">
+                        <label class="form-check-label" th:for="${#ids.prev('checkSingle')}">check</label>
+                        <span th:if="${#fields.hasErrors('checkSingle')}" th:errors="*{checkSingle}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">checkboxes</div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <div th:each="item : ${checkItem}">
+                        <input type="checkbox" class="form-check-input" th:field="*{checkMultiple}" th:value="${item.value}">
+                        <label class="form-check-label" th:for="${#ids.prev('checkMultiple')}" th:text="${item.key}"></label>
+                    </div>
+                    <span th:if="${#fields.hasErrors('checkMultiple')}" th:errors="*{checkMultiple}"></span>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <div class="form-group row">
+            <div class="col-sm-2">radios</div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <div th:each="item : ${radioItem}">
+                        <input type="radio" class="form-check-input" th:field="*{radio}" th:value="${item.value}">
+                        <label class="form-check-label" th:for="${#ids.prev('radio')}" th:text="${item.key}"></label>
+                    </div>
+                    <span th:if="${#fields.hasErrors('radio')}" th:errors="*{radio}"></span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">送信</button>
+        </div>
+    </form>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
